@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo Urbano | Ropa y Accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F0F0F;
+            color: #E2E8F0;
+        }
+        .hero-bg-store {
+            background-image: linear-gradient(rgba(0,0,0,0.5), #0F0F0F), url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2670&auto=format&fit=crop');
+            background-size: cover;
+            background-position: top;
+        }
+        .product-card-image {
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+        .product-card:hover .product-card-image {
+            transform: scale(1.05);
+            filter: brightness(0.8);
+        }
+        .product-card-button {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .product-card:hover .product-card-button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #mobile-menu-store, #cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        #cart-sidebar {
+             -ms-overflow-style: none;  /* IE and Edge */
+             scrollbar-width: none;  /* Firefox */
+        }
+        #cart-sidebar::-webkit-scrollbar {
+             display: none; /* Chrome, Safari, Opera */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-black/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-black text-2xl text-white tracking-tighter">ESTILO URBANO</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#new" class="text-slate-300 hover:text-white transition-colors">Novedades</a>
+                <a href="#products" class="text-slate-300 hover:text-white transition-colors">Ropa</a>
+                <a href="#products" class="text-slate-300 hover:text-white transition-colors">Accesorios</a>
+                <a href="index.html" class="text-slate-300 hover:text-white transition-colors"><i class="fas fa-arrow-left mr-1"></i>Volver al Portafolio</a>
+            </div>
+            <div class="flex items-center space-x-5">
+                <a href="#" id="cart-button" class="text-slate-300 hover:text-white text-lg relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </a>
+                <button id="mobile-menu-button-store" class="md:hidden text-slate-300 hover:text-white z-50"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-store" class="fixed inset-0 bg-black/90 backdrop-blur-lg z-40 transform -translate-x-full md:hidden flex items-center justify-center">
+        <div class="flex flex-col items-center space-y-8">
+            <a href="#new" class="text-slate-200 text-3xl font-bold hover:text-white transition-colors mobile-link-store">Novedades</a>
+            <a href="#products" class="text-slate-200 text-3xl font-bold hover:text-white transition-colors mobile-link-store">Ropa</a>
+            <a href="#products" class="text-slate-200 text-3xl font-bold hover:text-white transition-colors mobile-link-store">Accesorios</a>
+            <a href="index.html" class="mt-4 text-slate-200 text-xl hover:text-white transition-colors mobile-link-store"><i class="fas fa-arrow-left mr-2"></i>Volver al Portafolio</a>
+        </div>
+    </div>
+    
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-sm bg-[#111111] border-l border-gray-800 z-50 transform translate-x-full flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-gray-800">
+            <h2 class="text-2xl font-bold text-white">Tu Carrito</h2>
+            <button id="close-cart-button" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-grow p-6 space-y-4 overflow-y-auto">
+            <!-- Cart items will be injected here by JS -->
+            <p id="empty-cart-message" class="text-slate-400">Tu carrito está vacío.</p>
+        </div>
+        <div class="p-6 border-t border-gray-800">
+            <div class="flex justify-between items-center text-white mb-4">
+                <span class="text-lg">Subtotal</span>
+                <span id="cart-subtotal" class="text-2xl font-bold">$0.00</span>
+            </div>
+            <button class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-300 transition-colors">Finalizar Compra</button>
+        </div>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero-bg-store h-[50vh] md:h-[70vh] flex flex-col justify-end text-white pb-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4">DEFINE TU ESTILO</h1>
+            <p class="text-lg text-slate-200 mb-8">La nueva colección ya está aquí. Sé el primero en descubrirla.</p>
+            <a href="#products" class="bg-white text-black font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition-colors">
+                Ver Colección
+            </a>
+        </div>
+    </section>
+    
+    <!-- Featured Products Section -->
+    <section id="products" class="py-20 lg:py-28">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-center text-white mb-12">Productos Destacados</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Product Card -->
+                <div class="product-card group relative overflow-hidden rounded-lg" data-id="1" data-name="Sudadera Negra" data-price="65.00" data-img="https://images.unsplash.com/photo-1576551335368-3a89839f086c?w=500&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1618354691321-e851c56960d1?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="product-card-image w-full h-full object-cover aspect-square" alt="Sudadera Negra">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute bottom-0 left-0 p-4 w-full">
+                        <h3 class="font-semibold text-white">Sudadera Negra</h3>
+                        <p class="font-bold text-lg text-white">$65.00</p>
+                    </div>
+                    <button class="add-to-cart-button product-card-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transform-gpu translateY(10px) bg-white text-black font-bold py-2 px-5 rounded-full">
+                        Añadir
+                    </button>
+                </div>
+                <!-- Product Card -->
+                <div class="product-card group relative overflow-hidden rounded-lg" data-id="2" data-name="Camiseta Blanca" data-price="25.00" data-img="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop" class="product-card-image w-full h-full object-cover aspect-square" alt="Camiseta Blanca">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute bottom-0 left-0 p-4 w-full">
+                        <h3 class="font-semibold text-white">Camiseta Blanca Básica</h3>
+                        <p class="font-bold text-lg text-white">$25.00</p>
+                    </div>
+                     <button class="add-to-cart-button product-card-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transform-gpu translateY(10px) bg-white text-black font-bold py-2 px-5 rounded-full">
+                        Añadir
+                    </button>
+                </div>
+                <!-- Product Card -->
+                <div class="product-card group relative overflow-hidden rounded-lg" data-id="3" data-name="Gorra Snapback" data-price="30.00" data-img="https://images.unsplash.com/photo-1521093470119-a3acdc43374a?w=500&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1521093470119-a3acdc43374a?w=500&auto=format&fit=crop" class="product-card-image w-full h-full object-cover aspect-square" alt="Gorra Snapback">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute bottom-0 left-0 p-4 w-full">
+                        <h3 class="font-semibold text-white">Gorra Snapback</h3>
+                        <p class="font-bold text-lg text-white">$30.00</p>
+                    </div>
+                     <button class="add-to-cart-button product-card-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transform-gpu translateY(10px) bg-white text-black font-bold py-2 px-5 rounded-full">
+                        Añadir
+                    </button>
+                </div>
+                <!-- Product Card -->
+                <div class="product-card group relative overflow-hidden rounded-lg" data-id="4" data-name="Zapatillas Deportivas" data-price="120.00" data-img="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&auto=format&fit=crop">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&auto=format&fit=crop" class="product-card-image w-full h-full object-cover aspect-square" alt="Zapatillas Deportivas">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute bottom-0 left-0 p-4 w-full">
+                        <h3 class="font-semibold text-white">Zapatillas Deportivas</h3>
+                        <p class="font-bold text-lg text-white">$120.00</p>
+                    </div>
+                     <button class="add-to-cart-button product-card-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transform-gpu translateY(10px) bg-white text-black font-bold py-2 px-5 rounded-full">
+                        Añadir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 lg:py-24 bg-black">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-extrabold text-white mb-4">Únete a la Comunidad</h2>
+            <p class="text-slate-400 max-w-xl mx-auto mb-8">Suscríbete a nuestro newsletter y obtén un 10% de descuento en tu primera compra.</p>
+            <form id="newsletter-form" class="flex flex-col sm:flex-row max-w-md mx-auto gap-4">
+                <input type="email" id="newsletter-email" placeholder="Tu correo electrónico" class="flex-grow px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white text-white" required>
+                <button type="submit" class="bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] space-y-3"></div>
+
+    <!-- Footer -->
+    <footer class="bg-[#0F0F0F] border-t border-gray-800 py-12 mt-12">
+        <div class="container mx-auto px-4 text-center text-slate-400">
+             <p>&copy; 2025 Estilo Urbano. Todos los derechos reservados.</p>
+             <a href="index.html" class="text-sm text-slate-500 hover:text-white">Diseño web por Deybi Rivera</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button-store');
+            const mobileMenu = document.getElementById('mobile-menu-store');
+            const menuIcon = mobileMenuButton.querySelector('i');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-x-full');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
+            });
+            document.querySelectorAll('.mobile-link-store').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('-translate-x-full');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // --- Shopping Cart ---
+            const cartButton = document.getElementById('cart-button');
+            const closeCartButton = document.getElementById('close-cart-button');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartCount = document.getElementById('cart-count');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            
+            let cart = [];
+
+            const toggleCart = () => cartSidebar.classList.toggle('translate-x-full');
+
+            cartButton.addEventListener('click', toggleCart);
+            closeCartButton.addEventListener('click', toggleCart);
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const card = e.target.closest('.product-card');
+                    const product = {
+                        id: card.dataset.id,
+                        name: card.dataset.name,
+                        price: parseFloat(card.dataset.price),
+                        img: card.dataset.img,
+                        quantity: 1
+                    };
+                    addToCart(product);
+                });
+            });
+
+            const addToCart = (product) => {
+                const existingProduct = cart.find(item => item.id === product.id);
+                if (existingProduct) {
+                    existingProduct.quantity++;
+                } else {
+                    cart.push(product);
+                }
+                updateCart();
+                showToast(`${product.name} añadido al carrito`);
+            };
+            
+            const updateCart = () => {
+                cartItemsContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    cartItemsContainer.appendChild(emptyCartMessage);
+                    emptyCartMessage.style.display = 'block';
+                } else {
+                    emptyCartMessage.style.display = 'none';
+                    cart.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.className = 'flex items-center gap-4';
+                        itemElement.innerHTML = `
+                            <img src="${item.img}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover">
+                            <div class="flex-grow">
+                                <h4 class="text-white font-semibold">${item.name}</h4>
+                                <p class="text-slate-400">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                            </div>
+                            <button class="remove-from-cart text-red-400 hover:text-red-300" data-id="${item.id}">&times;</button>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+                    });
+                }
+                
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+
+                document.querySelectorAll('.remove-from-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const id = e.target.dataset.id;
+                        cart = cart.filter(item => item.id !== id);
+                        updateCart();
+                    });
+                });
+            };
+
+            // --- Newsletter Form ---
+            const newsletterForm = document.getElementById('newsletter-form');
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = document.getElementById('newsletter-email');
+                if(emailInput.value) {
+                    showToast('¡Gracias por suscribirte!');
+                    newsletterForm.reset();
+                }
+            });
+
+            // --- Toast Notification ---
+            function showToast(message) {
+                const toastContainer = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'bg-black border border-gray-700 text-white px-5 py-3 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 ease-out';
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+                setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 10);
+                setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
+

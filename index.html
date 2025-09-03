@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deybi Rivera | Desarrollo Web Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e2e8f0;
+        overflow-x: hidden;
+        cursor: none;
+      }
+      /* --- Cursor Personalizado --- */
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #a78bfa;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s linear;
+      }
+      .cursor-outline {
+        width: 30px;
+        height: 30px;
+        border: 2px solid #a78bfa;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.2s ease-out;
+      }
+      .cursor-outline.hovered {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.5;
+      }
+
+      /* --- Efectos de Texto y Degradados --- */
+      .text-glow {
+        text-shadow: 0 0 8px rgba(167, 139, 250, 0.6),
+          0 0 20px rgba(139, 92, 246, 0.4);
+      }
+      .text-gradient-purple {
+        background: linear-gradient(90deg, #a78bfa, #d8b4fe, #fbcfe8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .bg-gradient-radial-hero {
+        background-image: radial-gradient(
+          circle at 50% 50%,
+          rgba(13, 13, 18, 0.2) 0%,
+          #0a0a0a 70%
+        );
+      }
+
+      /* --- Estilos Adicionales --- */
+      .portfolio-card {
+        background-color: #111111;
+        border: 1px solid #2d2d2d;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+          box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      .portfolio-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(167, 139, 250, 0.25);
+      }
+      .portfolio-card img {
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      .portfolio-card:hover img {
+        transform: scale(1.1);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      #hero-section {
+        position: relative;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+      #hero-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(167, 139, 250, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(167, 139, 250, 0.1) 1px,
+            transparent 1px
+          );
+        background-size: 40px 40px;
+        animation: moveGrid 20s linear infinite;
+      }
+      @keyframes moveGrid {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 40px 80px;
+        }
+      }
+      #mobile-menu {
+        transition: transform 0.3s ease-in-out;
+      }
+      .pricing-card-highlight {
+        border: 2px solid #a78bfa;
+        box-shadow: 0 0 25px rgba(167, 139, 250, 0.3);
+      }
+
+      /* FAQ Accordion */
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+      }
+      .faq-question.active + .faq-answer {
+        max-height: 200px; /* Adjust as needed */
+      }
+      .faq-question .faq-icon {
+        transition: transform 0.3s ease;
+      }
+      .faq-question.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Back to top button */
+      #back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #a78bfa;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s, visibility 0.3s;
+      }
+      #back-to-top.show {
+        opacity: 1;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Header & Navigation -->
+    <header
+      class="bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="font-extrabold text-2xl text-white tracking-tighter">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+              stroke="url(#logo-gradient)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2 7L12 12L22 7"
+              stroke="url(#logo-gradient)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 12V22"
+              stroke="url(#logo-gradient)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient
+                id="logo-gradient"
+                x1="2"
+                y1="2"
+                x2="22"
+                y2="22"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#A78BFA" />
+                <stop offset="1" stop-color="#FBCFE8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </a>
+        <div class="hidden md:flex items-center space-x-8 text-sm">
+          <a
+            href="#servicios"
+            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
+            >Servicios</a
+          >
+          <a
+            href="#portfolio"
+            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
+            >Portafolio</a
+          >
+          <a
+            href="#planes"
+            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
+            >Planes</a
+          >
+          <a
+            href="#faq"
+            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
+            >FAQ</a
+          >
+          <a
+            href="#contact"
+            class="bg-violet-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-violet-600 transition-all duration-300 shadow-lg shadow-violet-500/20"
+            >Hablemos</a
+          >
+        </div>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden text-slate-300 hover:text-violet-300 z-50"
+        >
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-black/90 backdrop-blur-lg z-40 transform -translate-x-full md:hidden flex items-center justify-center"
+    >
+      <div class="flex flex-col items-center space-y-8">
+        <a
+          href="#servicios"
+          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
+          >Servicios</a
+        >
+        <a
+          href="#portfolio"
+          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
+          >Portafolio</a
+        >
+        <a
+          href="#planes"
+          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
+          >Planes</a
+        >
+        <a
+          href="#faq"
+          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
+          >FAQ</a
+        >
+        <a
+          href="#contact"
+          class="mt-4 bg-violet-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-violet-600 transition-colors mobile-link"
+          >Hablemos</a
+        >
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section
+      id="hero-section"
+      class="relative min-h-screen flex items-center justify-center text-center py-20"
+    >
+      <div id="hero-grid"></div>
+      <div class="absolute inset-0 bg-gradient-radial-hero z-10"></div>
+      <div class="relative z-20 px-4 max-w-5xl mx-auto" id="hero-content">
+        <span
+          class="inline-block bg-violet-500/10 text-violet-300 text-sm font-semibold px-4 py-1 rounded-full mb-4 border border-violet-500/20"
+          >Sitios web que generan clientes</span
+        >
+        <h1
+          class="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-tight text-glow transition-transform duration-300"
+          data-depth="0.1"
+        >
+          Convierte Clics <br class="hidden md:block" />
+          en <span class="text-gradient-purple">Clientes</span>
+        </h1>
+        <p
+          class="text-xl sm:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 transition-transform duration-300"
+          data-depth="0.05"
+        >
+          Diseño web profesional, rápido y optimizado para que tu negocio
+          destaque en Macas y todo el Ecuador.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#planes"
+            class="inline-block bg-white text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-violet-200 transition-all duration-300 shadow-2xl shadow-violet-500/30"
+          >
+            <span>Ver Planes</span> <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+          <a
+            href="#portfolio"
+            class="inline-block bg-transparent border-2 border-slate-600 text-slate-300 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-800 hover:border-slate-500 transition-colors"
+          >
+            Ver Proyectos
+          </a>
+        </div>
+      </div>
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+        <a href="#servicios" class="text-slate-400 animate-bounce"
+          ><i class="fas fa-chevron-down text-2xl"></i
+        ></a>
+      </div>
+    </section>
+
+    <!-- Services/Features Section -->
+    <section id="servicios" class="py-20 lg:py-28">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+          ¿Qué obtienes con tu web?
+        </h2>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-16">
+          Cada proyecto incluye un estándar de calidad profesional para asegurar
+          tu éxito.
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="glass-card p-8 rounded-2xl text-left transform transition duration-500 hover:-translate-y-2 hover:border-violet-400"
+          >
+            <i class="fas fa-mobile-alt text-4xl text-violet-300 mb-4"></i>
+            <h3 class="font-bold text-2xl text-white mb-2">100% Responsivo</h3>
+            <p class="text-slate-300">
+              Se ve perfecto en celular, tablet y desktop.
+            </p>
+          </div>
+          <div
+            class="glass-card p-8 rounded-2xl text-left transform transition duration-500 hover:-translate-y-2 hover:border-violet-400"
+          >
+            <i class="fas fa-rocket text-4xl text-violet-300 mb-4"></i>
+            <h3 class="font-bold text-2xl text-white mb-2">
+              Rápido y Optimizado
+            </h3>
+            <p class="text-slate-300">
+              Buenas prácticas de performance y SEO básico.
+            </p>
+          </div>
+          <div
+            class="glass-card p-8 rounded-2xl text-left transform transition duration-500 hover:-translate-y-2 hover:border-violet-400"
+          >
+            <i class="fas fa-shield-alt text-4xl text-violet-300 mb-4"></i>
+            <h3 class="font-bold text-2xl text-white mb-2">
+              Seguro y Confiable
+            </h3>
+            <p class="text-slate-300">
+              Certificado SSL y buenas prácticas de seguridad.
+            </p>
+          </div>
+          <div
+            class="glass-card p-8 rounded-2xl text-left transform transition duration-500 hover:-translate-y-2 hover:border-violet-400"
+          >
+            <i class="fas fa-layer-group text-4xl text-violet-300 mb-4"></i>
+            <h3 class="font-bold text-2xl text-white mb-2">Diseño Moderno</h3>
+            <p class="text-slate-300">
+              Interfaces limpias y estética profesional.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 lg:py-28 bg-[#111111]">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl lg:text-5xl font-extrabold text-center text-white mb-16"
+        >
+          Demos listas para tu Negocio
+        </h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="portfolio-card rounded-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2574&auto=format&fit=crop"
+              alt="Proyecto Restaurante"
+              class="w-full h-80 object-cover"
+            />
+            <div class="p-8">
+              <h3 class="font-bold text-3xl text-white mb-2">
+                Restaurante "Aroma"
+              </h3>
+              <p class="text-slate-400 mb-4">
+                Carta digital, reservas por WhatsApp y mapa de ubicación. Ideal
+                para negocios gastronómicos.
+              </p>
+              <a
+                href="restaurante.html"
+                class="text-violet-400 font-semibold group"
+                >Ver Demo
+                <i
+                  class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
+                ></i
+              ></a>
+            </div>
+          </div>
+          <div class="portfolio-card rounded-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Proyecto Tienda Online"
+              class="w-full h-80 object-cover"
+            />
+            <div class="p-8">
+              <h3 class="font-bold text-3xl text-white mb-2">
+                Tienda "Estilo Urbano"
+              </h3>
+              <p class="text-slate-400 mb-4">
+                Catálogo de productos, carrito de compras funcional y diseño
+                enfocado en la conversión de ventas.
+              </p>
+              <a href="tienda.html" class="text-violet-400 font-semibold group"
+                >Ver Demo
+                <i
+                  class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="planes" class="py-20 lg:py-28">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+            Soluciones a tu Medida
+          </h2>
+          <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+            Elige el punto de partida perfecto para tu proyecto. Contáctame para
+            una cotización detallada.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="glass-card p-8 rounded-2xl flex flex-col">
+            <div class="flex-grow">
+              <i class="fas fa-layer-group text-3xl text-violet-300 mb-4"></i>
+              <h3 class="text-2xl font-bold text-white">Esencial</h3>
+              <p class="text-slate-400 mb-6">One-page profesional</p>
+              <ul class="space-y-3 text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Sección héroe + servicios + contacto</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>WhatsApp y redes integradas</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Entrega en 3-5 días</span>
+                </li>
+              </ul>
+            </div>
+            <a
+              href="#contact"
+              class="mt-8 w-full text-center bg-slate-700 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-600 transition-colors"
+              >Solicitar Cotización</a
+            >
+          </div>
+          <div
+            class="glass-card p-8 rounded-2xl flex flex-col pricing-card-highlight relative"
+          >
+            <span
+              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-violet-500 text-white text-sm font-semibold px-4 py-1 rounded-full"
+              >Más Elegido</span
+            >
+            <div class="flex-grow">
+              <i class="fas fa-briefcase text-3xl text-violet-300 mb-4"></i>
+              <h3 class="text-2xl font-bold text-white">Negocios</h3>
+              <p class="text-slate-400 mb-6">Sitio de 3-5 páginas</p>
+              <ul class="space-y-3 text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Home, Nosotros, Servicios, etc.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Blog básico o catálogo</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Formularios y analíticas</span>
+                </li>
+              </ul>
+            </div>
+            <a
+              href="#contact"
+              class="mt-8 w-full text-center bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold py-3 px-8 rounded-full hover:shadow-lg hover:shadow-violet-500/40 transition-shadow"
+              >Solicitar Cotización</a
+            >
+          </div>
+          <div class="glass-card p-8 rounded-2xl flex flex-col">
+            <div class="flex-grow">
+              <i class="fas fa-shopping-cart text-3xl text-violet-300 mb-4"></i>
+              <h3 class="text-2xl font-bold text-white">Tienda Online</h3>
+              <p class="text-slate-400 mb-6">E-commerce listo para vender</p>
+              <ul class="space-y-3 text-slate-300">
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Catálogo, carrito y checkout</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Pasarela de pago integrada</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fas fa-check-circle text-violet-400 mt-1"></i
+                  ><span>Capacitación básica</span>
+                </li>
+              </ul>
+            </div>
+            <a
+              href="#contact"
+              class="mt-8 w-full text-center bg-slate-700 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-600 transition-colors"
+              >Solicitar Cotización</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-20 lg:py-28 bg-[#111111]">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl lg:text-5xl font-extrabold text-center text-white mb-16"
+        >
+          Lo que dicen nuestros clientes
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="bg-[#1a1a1a] p-8 rounded-xl border border-gray-800">
+            <i class="fas fa-quote-left text-violet-400 text-3xl mb-4"></i>
+            <p class="text-slate-300 italic">
+              "Muy profesional y rápido. Nuestra barbería ahora recibe citas
+              desde la web y WhatsApp. ¡Totalmente recomendado!"
+            </p>
+            <p class="font-bold text-white mt-4">— Cliente Satisfecho</p>
+          </div>
+          <div class="bg-[#1a1a1a] p-8 rounded-xl border border-gray-800">
+            <i class="fas fa-quote-left text-violet-400 text-3xl mb-4"></i>
+            <p class="text-slate-300 italic">
+              "El diseño superó nuestras expectativas. Capturaron a la
+              perfección la esencia de nuestra marca. ¡Increíble!"
+            </p>
+            <p class="font-bold text-white mt-4">— Cliente Satisfecho</p>
+          </div>
+          <div class="bg-[#1a1a1a] p-8 rounded-xl border border-gray-800">
+            <i class="fas fa-quote-left text-violet-400 text-3xl mb-4"></i>
+            <p class="text-slate-300 italic">
+              "Nuestras ventas se dispararon tras el rediseño de la tienda. La
+              página es rápida y fácil de usar."
+            </p>
+            <p class="font-bold text-white mt-4">— Cliente Satisfecho</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 lg:py-28">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h2
+          class="text-4xl lg:text-5xl font-extrabold text-center text-white mb-16"
+        >
+          Preguntas Frecuentes
+        </h2>
+        <div class="space-y-4">
+          <div class="bg-[#111111] border border-gray-800 rounded-lg">
+            <button
+              class="faq-question w-full flex justify-between items-center text-left p-6"
+            >
+              <span class="font-bold text-xl text-white"
+                >¿Necesito dominio y hosting?</span
+              >
+              <i class="fas fa-chevron-down text-violet-400 faq-icon"></i>
+            </button>
+            <div class="faq-answer px-6 pb-6">
+              <p class="text-slate-400">
+                Si no tienes, te asesoro para contratar el mejor plan
+                calidad/precio y lo configuro por ti sin costo adicional.
+              </p>
+            </div>
+          </div>
+          <div class="bg-[#111111] border border-gray-800 rounded-lg">
+            <button
+              class="faq-question w-full flex justify-between items-center text-left p-6"
+            >
+              <span class="font-bold text-xl text-white"
+                >¿Cuánto tarda el proyecto?</span
+              >
+              <i class="fas fa-chevron-down text-violet-400 faq-icon"></i>
+            </button>
+            <div class="faq-answer px-6 pb-6">
+              <p class="text-slate-400">
+                Una página de aterrizaje (one-page) suele estar lista en 3-5
+                días, mientras que sitios más complejos de varias páginas tardan
+                entre 1 y 2 semanas.
+              </p>
+            </div>
+          </div>
+          <div class="bg-[#111111] border border-gray-800 rounded-lg">
+            <button
+              class="faq-question w-full flex justify-between items-center text-left p-6"
+            >
+              <span class="font-bold text-xl text-white"
+                >¿El sitio incluye SEO?</span
+              >
+              <i class="fas fa-chevron-down text-violet-400 faq-icon"></i>
+            </button>
+            <div class="faq-answer px-6 pb-6">
+              <p class="text-slate-400">
+                Todos los sitios incluyen un SEO técnico básico (metadatos,
+                estructura, performance) para asegurar una buena base. Ofrezco
+                planes de SEO avanzado por separado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 lg:py-28">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+          Cuéntame de tu proyecto
+        </h2>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12">
+          Respondo en el mismo día. Agendemos una llamada o escríbeme.
+        </p>
+        <div
+          class="bg-[#111111] border border-gray-800 p-8 sm:p-12 rounded-2xl shadow-2xl shadow-black/50 max-w-3xl mx-auto"
+        >
+          <div
+            class="flex flex-col sm:flex-row justify-center items-center gap-8 mb-8"
+          >
+            <a
+              href="https://wa.me/593986082543"
+              target="_blank"
+              class="flex items-center gap-3 text-lg text-slate-300 hover:text-white"
+              ><i class="fab fa-whatsapp text-2xl text-green-400"></i>+593 986
+              082 543</a
+            >
+            <a
+              href="mailto:deybirivera4@outlook.es"
+              class="flex items-center gap-3 text-lg text-slate-300 hover:text-white"
+              ><i class="fas fa-envelope text-2xl text-violet-400"></i
+              >deybirivera4@outlook.es</a
+            >
+          </div>
+          <form id="contact-form" class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="Tu Nombre"
+                class="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 text-white"
+                required
+              />
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="Tu Correo Electrónico"
+                class="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 text-white"
+                required
+              />
+            </div>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Cuéntanos sobre tu proyecto..."
+              class="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 text-white"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              id="submit-button"
+              class="w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold py-4 px-8 rounded-full hover:shadow-lg hover:shadow-violet-500/40 transition-shadow text-lg"
+            >
+              Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div
+      id="toast-container"
+      class="fixed bottom-5 right-5 z-50 space-y-3"
+    ></div>
+    <a href="#" id="back-to-top" class="hover:bg-violet-600 transition-colors"
+      ><i class="fas fa-arrow-up"></i
+    ></a>
+
+    <footer class="bg-black/50 border-t border-gray-800 py-8 mt-12">
+      <div class="container mx-auto px-6 text-center text-slate-400">
+        <div class="flex justify-center space-x-6 mb-4">
+          <a
+            href="https://www.instagram.com/xdeybi_4"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-violet-400 transition-colors"
+            ><i class="fab fa-instagram text-xl"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/deybi-rivera-3a2533227/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-violet-400 transition-colors"
+            ><i class="fab fa-linkedin-in text-xl"></i
+          ></a>
+          <a
+            href="https://www.facebook.com/xDeybi4"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-violet-400 transition-colors"
+            ><i class="fab fa-facebook text-xl"></i
+          ></a>
+        </div>
+        <p>
+          &copy; 2025 Deybi Rivera.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // --- Custom Cursor ---
+      const cursorDot = document.querySelector(".cursor-dot");
+      const cursorOutline = document.querySelector(".cursor-outline");
+      window.addEventListener("mousemove", (e) => {
+        const { clientX, clientY } = e;
+        cursorDot.style.left = `${clientX}px`;
+        cursorDot.style.top = `${clientY}px`;
+        cursorOutline.style.left = `${clientX}px`;
+        cursorOutline.style.top = `${clientY}px`;
+      });
+
+      document
+        .querySelectorAll("a, button, input, textarea, .portfolio-card")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () =>
+            cursorOutline.classList.add("hovered")
+          );
+          el.addEventListener("mouseleave", () =>
+            cursorOutline.classList.remove("hovered")
+          );
+        });
+
+      // --- Hero Parallax Effect ---
+      const heroSection = document.getElementById("hero-section");
+      heroSection.addEventListener("mousemove", (e) => {
+        const { clientX, clientY } = e;
+        const x = (clientX / window.innerWidth - 0.5) * 2;
+        const y = (clientY / window.innerHeight - 0.5) * 2;
+        document
+          .getElementById("hero-content")
+          .querySelectorAll("[data-depth]")
+          .forEach((layer) => {
+            const depth = layer.getAttribute("data-depth");
+            layer.style.transform = `translateX(${
+              x * depth * 30
+            }px) translateY(${y * depth * 30}px)`;
+          });
+      });
+
+      // --- Mobile Menu ---
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = mobileMenuButton.querySelector("i");
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("-translate-x-full");
+        menuIcon.classList.toggle("fa-bars");
+        menuIcon.classList.toggle("fa-times");
+      });
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("-translate-x-full");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
+        });
+      });
+
+      // --- FAQ Accordion ---
+      document.querySelectorAll(".faq-question").forEach((button) => {
+        button.addEventListener("click", () => {
+          const answer = button.nextElementSibling;
+          button.classList.toggle("active");
+        });
+      });
+
+      // --- Toast Notification ---
+      function showToast(message, type = "success") {
+        const toastContainer = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        let colors =
+          type === "success"
+            ? "bg-green-500 border-green-400"
+            : "bg-red-500 border-red-400";
+        toast.className = `text-white px-6 py-3 rounded-xl shadow-2xl transform translate-x-full opacity-0 transition-all duration-500 ease-in-out border ${colors}`;
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+        setTimeout(
+          () => toast.classList.remove("translate-x-full", "opacity-0"),
+          10
+        );
+        setTimeout(() => {
+          toast.classList.add("opacity-0");
+          setTimeout(() => toast.remove(), 500);
+        }, 5000);
+      }
+
+      // --- Back to top button ---
+      const backToTopButton = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      });
+
+      // --- Contact Form ---
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const name = document.getElementById("contact-name").value;
+          const email = document.getElementById("contact-email").value;
+          const message = document.getElementById("message").value;
+
+          if (name && email && message) {
+            const personalizedMessage = `¡Hola! 👋 Te contacto desde tu portafolio web.\n\n*Mi nombre:* ${name}\n*Mi correo:* ${email}\n\n*Sobre mi proyecto:*\n${message}\n\nQuedo a la espera de tu respuesta. ¡Gracias!`;
+            const whatsappUrl = `https://wa.me/593986082543?text=${encodeURIComponent(
+              personalizedMessage
+            )}`;
+
+            showToast("¡Perfecto! Redirigiendo a WhatsApp...");
+
+            setTimeout(() => {
+              window.open(whatsappUrl, "_blank");
+            }, 1500);
+
+            this.reset();
+          } else {
+            showToast("Por favor, completa todos los campos.", "error");
+          }
+        });
+    </script>
+  </body>
+</html>
