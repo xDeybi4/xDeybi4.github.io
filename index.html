@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -15,293 +15,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #0a0a0a;
-        color: #e2e8f0;
-        overflow-x: hidden;
-        cursor: none;
-      }
-      /* --- Cursor Personalizado --- */
-      .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #a78bfa;
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.1s linear;
-      }
-      .cursor-outline {
-        width: 30px;
-        height: 30px;
-        border: 2px solid #a78bfa;
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.2s ease-out;
-      }
-      .cursor-outline.hovered {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0.5;
-      }
-
-      /* --- Efectos de Texto y Degradados --- */
-      .text-glow {
-        text-shadow: 0 0 8px rgba(167, 139, 250, 0.6),
-          0 0 20px rgba(139, 92, 246, 0.4);
-      }
-      .text-gradient-purple {
-        background: linear-gradient(90deg, #a78bfa, #d8b4fe, #fbcfe8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .bg-gradient-radial-hero {
-        background-image: radial-gradient(
-          circle at 50% 50%,
-          rgba(13, 13, 18, 0.2) 0%,
-          #0a0a0a 70%
-        );
-      }
-
-      /* --- Estilos Adicionales --- */
-      .portfolio-card {
-        background-color: #111111;
-        border: 1px solid #2d2d2d;
-        overflow: hidden;
-        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-          box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      }
-      .portfolio-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(167, 139, 250, 0.25);
-      }
-      .portfolio-card img {
-        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-      }
-      .portfolio-card:hover img {
-        transform: scale(1.1);
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      #hero-section {
-        position: relative;
-        overflow: hidden;
-        perspective: 1000px;
-      }
-      #hero-grid {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        background-image: linear-gradient(
-            to right,
-            rgba(167, 139, 250, 0.1) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(167, 139, 250, 0.1) 1px,
-            transparent 1px
-          );
-        background-size: 40px 40px;
-        animation: moveGrid 20s linear infinite;
-      }
-      @keyframes moveGrid {
-        from {
-          background-position: 0 0;
-        }
-        to {
-          background-position: 40px 80px;
-        }
-      }
-      #mobile-menu {
-        transition: transform 0.3s ease-in-out;
-      }
-      .pricing-card-highlight {
-        border: 2px solid #a78bfa;
-        box-shadow: 0 0 25px rgba(167, 139, 250, 0.3);
-      }
-
-      /* FAQ Accordion */
-      .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-in-out;
-      }
-      .faq-question.active + .faq-answer {
-        max-height: 200px; /* Adjust as needed */
-      }
-      .faq-question .faq-icon {
-        transition: transform 0.3s ease;
-      }
-      .faq-question.active .faq-icon {
-        transform: rotate(180deg);
-      }
-
-      /* Back to top button */
-      #back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #a78bfa;
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.3s, visibility 0.3s;
-      }
-      #back-to-top.show {
-        opacity: 1;
-        display: flex;
-      }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body class="antialiased">
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Header & Navigation -->
-    <header
-      class="bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800"
-    >
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <a href="#" class="font-extrabold text-2xl text-white tracking-tighter">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
-              stroke="url(#logo-gradient)"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M2 7L12 12L22 7"
-              stroke="url(#logo-gradient)"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M12 12V22"
-              stroke="url(#logo-gradient)"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <defs>
-              <linearGradient
-                id="logo-gradient"
-                x1="2"
-                y1="2"
-                x2="22"
-                y2="22"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#A78BFA" />
-                <stop offset="1" stop-color="#FBCFE8" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </a>
-        <div class="hidden md:flex items-center space-x-8 text-sm">
-          <a
-            href="#servicios"
-            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
-            >Servicios</a
-          >
-          <a
-            href="#portfolio"
-            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
-            >Portafolio</a
-          >
-          <a
-            href="#planes"
-            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
-            >Planes</a
-          >
-          <a
-            href="#faq"
-            class="text-slate-300 hover:text-violet-300 font-medium transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="#contact"
-            class="bg-violet-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-violet-600 transition-all duration-300 shadow-lg shadow-violet-500/20"
-            >Hablemos</a
-          >
-        </div>
-        <button
-          id="mobile-menu-button"
-          class="md:hidden text-slate-300 hover:text-violet-300 z-50"
-        >
-          <i class="fas fa-bars text-2xl"></i>
-        </button>
-      </nav>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="fixed inset-0 bg-black/90 backdrop-blur-lg z-40 transform -translate-x-full md:hidden flex items-center justify-center"
-    >
-      <div class="flex flex-col items-center space-y-8">
-        <a
-          href="#servicios"
-          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
-          >Servicios</a
-        >
-        <a
-          href="#portfolio"
-          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
-          >Portafolio</a
-        >
-        <a
-          href="#planes"
-          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
-          >Planes</a
-        >
-        <a
-          href="#faq"
-          class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link"
-          >FAQ</a
-        >
-        <a
-          href="#contact"
-          class="mt-4 bg-violet-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-violet-600 transition-colors mobile-link"
-          >Hablemos</a
-        >
-      </div>
-    </div>
+    <div id="site-header"></div>
 
     <!-- Hero Section -->
     <section
@@ -337,11 +57,10 @@
             <span>Ver Planes</span> <i class="fas fa-arrow-right ml-2"></i>
           </a>
           <a
-            href="#portfolio"
+            href="#productos"
             class="inline-block bg-transparent border-2 border-slate-600 text-slate-300 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-800 hover:border-slate-500 transition-colors"
+            >Ver Productos</a
           >
-            Ver Proyectos
-          </a>
         </div>
       </div>
       <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
@@ -406,59 +125,34 @@
       </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 lg:py-28 bg-[#111111]">
+    <!-- Productos Section (reemplaza Portafolio) -->
+    <section id="productos" class="py-20 lg:py-28 bg-[#111111]">
       <div class="container mx-auto px-4">
         <h2
           class="text-4xl lg:text-5xl font-extrabold text-center text-white mb-16"
         >
-          Demos listas para tu Negocio
+          Productos
         </h2>
-        <div class="grid md:grid-cols-2 gap-10">
-          <div class="portfolio-card rounded-2xl">
-            <img
-              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2574&auto=format&fit=crop"
-              alt="Proyecto Restaurante"
-              class="w-full h-80 object-cover"
-            />
-            <div class="p-8">
-              <h3 class="font-bold text-3xl text-white mb-2">
-                Restaurante "Aroma"
-              </h3>
-              <p class="text-slate-400 mb-4">
-                Carta digital, reservas por WhatsApp y mapa de ubicación. Ideal
-                para negocios gastronómicos.
-              </p>
-              <a
-                href="restaurante.html"
-                class="text-violet-400 font-semibold group"
-                >Ver Demo
-                <i
-                  class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
-                ></i
-              ></a>
+        <div class="max-w-6xl mx-auto">
+          <div class="portfolio-card rounded-3xl overflow-hidden flex flex-col lg:flex-row bg-[#0d0d0d]">
+            <div class="lg:w-1/2 h-72 lg:h-auto">
+              <img src="assets/promotion.png" alt="Vulyx Taller - Gestión de taller automotriz" class="w-full h-full object-cover">
             </div>
-          </div>
-          <div class="portfolio-card rounded-2xl">
-            <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Proyecto Tienda Online"
-              class="w-full h-80 object-cover"
-            />
-            <div class="p-8">
-              <h3 class="font-bold text-3xl text-white mb-2">
-                Tienda "Estilo Urbano"
-              </h3>
-              <p class="text-slate-400 mb-4">
-                Catálogo de productos, carrito de compras funcional y diseño
-                enfocado en la conversión de ventas.
-              </p>
-              <a href="tienda.html" class="text-violet-400 font-semibold group"
-                >Ver Demo
-                <i
-                  class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
-                ></i
-              ></a>
+            <div class="p-8 lg:w-1/2 flex flex-col justify-center">
+              <h3 class="font-bold text-3xl text-white mb-4">Vulyx Taller — Gestión para talleres automotrices</h3>
+              <p class="text-slate-400 mb-6">Software para talleres: órdenes de trabajo, control de repuestos e inventario, historial de vehículos, facturación y reportes. Diseñado para reducir tiempos de servicio y mejorar la trazabilidad.</p>
+
+              <ul class="text-sm text-slate-300 space-y-2 mb-6">
+                <li>✔ Órdenes de trabajo y asignación de técnicos</li>
+                <li>✔ Gestión de repuestos e inventario (kárdex)</li>
+                <li>✔ Historial de clientes y vehículos</li>
+                <li>✔ Facturación, presupuestos y reportes</li>
+              </ul>
+
+              <div class="flex gap-4">
+                <a href="taller.html" class="bg-accent text-black font-semibold py-3 px-5 rounded-lg">Ver Detalles</a>
+                <a href="#contact" class="border border-slate-600 text-slate-300 py-3 px-5 rounded-lg">Solicitar Demo</a>
+              </div>
             </div>
           </div>
         </div>
@@ -742,36 +436,7 @@
       ><i class="fas fa-arrow-up"></i
     ></a>
 
-    <footer class="bg-black/50 border-t border-gray-800 py-8 mt-12">
-      <div class="container mx-auto px-6 text-center text-slate-400">
-        <div class="flex justify-center space-x-6 mb-4">
-          <a
-            href="https://www.instagram.com/xdeybi_4"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-violet-400 transition-colors"
-            ><i class="fab fa-instagram text-xl"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/deybi-rivera-3a2533227/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-violet-400 transition-colors"
-            ><i class="fab fa-linkedin-in text-xl"></i
-          ></a>
-          <a
-            href="https://www.facebook.com/xDeybi4"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-violet-400 transition-colors"
-            ><i class="fab fa-facebook text-xl"></i
-          ></a>
-        </div>
-        <p>
-          &copy; 2025 Deybi Rivera.
-        </p>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
 
     <script>
       // --- Custom Cursor ---
@@ -789,10 +454,10 @@
         .querySelectorAll("a, button, input, textarea, .portfolio-card")
         .forEach((el) => {
           el.addEventListener("mouseenter", () =>
-            cursorOutline.classList.add("hovered")
+            cursorOutline.classList.add("hovered"),
           );
           el.addEventListener("mouseleave", () =>
-            cursorOutline.classList.remove("hovered")
+            cursorOutline.classList.remove("hovered"),
           );
         });
 
@@ -813,22 +478,26 @@
           });
       });
 
-      // --- Mobile Menu ---
+      // --- Mobile Menu (guarded) ---
       const mobileMenuButton = document.getElementById("mobile-menu-button");
       const mobileMenu = document.getElementById("mobile-menu");
-      const menuIcon = mobileMenuButton.querySelector("i");
-      mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("-translate-x-full");
-        menuIcon.classList.toggle("fa-bars");
-        menuIcon.classList.toggle("fa-times");
-      });
-      document.querySelectorAll(".mobile-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("-translate-x-full");
-          menuIcon.classList.remove("fa-times");
-          menuIcon.classList.add("fa-bars");
+      const menuIcon = mobileMenuButton
+        ? mobileMenuButton.querySelector("i")
+        : null;
+      if (mobileMenuButton && mobileMenu && menuIcon) {
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("-translate-x-full");
+          menuIcon.classList.toggle("fa-bars");
+          menuIcon.classList.toggle("fa-times");
         });
-      });
+        document.querySelectorAll(".mobile-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.add("-translate-x-full");
+            menuIcon.classList.remove("fa-times");
+            menuIcon.classList.add("fa-bars");
+          });
+        });
+      }
 
       // --- FAQ Accordion ---
       document.querySelectorAll(".faq-question").forEach((button) => {
@@ -851,7 +520,7 @@
         toastContainer.appendChild(toast);
         setTimeout(
           () => toast.classList.remove("translate-x-full", "opacity-0"),
-          10
+          10,
         );
         setTimeout(() => {
           toast.classList.add("opacity-0");
@@ -881,7 +550,7 @@
           if (name && email && message) {
             const personalizedMessage = `¡Hola! 👋 Te contacto desde tu portafolio web.\n\n*Mi nombre:* ${name}\n*Mi correo:* ${email}\n\n*Sobre mi proyecto:*\n${message}\n\nQuedo a la espera de tu respuesta. ¡Gracias!`;
             const whatsappUrl = `https://wa.me/593986082543?text=${encodeURIComponent(
-              personalizedMessage
+              personalizedMessage,
             )}`;
 
             showToast("¡Perfecto! Redirigiendo a WhatsApp...");
@@ -896,5 +565,6 @@
           }
         });
     </script>
+    <script src="assets/js/include.js" defer></script>
   </body>
 </html>

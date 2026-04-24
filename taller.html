@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VULYX Taller - Software Automotriz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- page styles moved to assets/css/styles.css -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="text-slate-200 antialiased">
+
+<div id="site-header"></div>
+
+<header class="pt-20 pb-24 px-6 text-center">
+    
+    <h1 class="text-6xl md:text-8xl font-extrabold mb-4">
+        <span class="vulyx-gradient-text uppercase">Vulyx</span>
+        <span class="taller-highlight lowercase">taller</span>
+    </h1>
+    <h2 class="text-2xl md:text-4xl font-bold text-white max-w-3xl mx-auto">
+        Control total de tu taller en un solo sistema
+    </h2>
+    <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
+        Gestiona órdenes, inventario, clientes y finanzas de forma clara, organizada y sin pérdidas.
+    </p>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 pb-20">
+
+    <!-- PLANES -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+
+        <!-- SaaS -->
+        <div class="vulyx-card p-10 rounded-3xl flex flex-col">
+            <h3 class="text-blue-400 text-xs font-bold uppercase mb-4">Plan Mensual</h3>
+
+            <div class="text-5xl font-extrabold text-white">$35
+                <span class="text-sm text-slate-400">/ mes + IVA</span>
+            </div>
+
+            <div class="mt-6 mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
+                <p class="text-sm text-slate-300">
+                    <strong>Implementación:</strong> $250 + IVA
+                </p>
+            </div>
+
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                <li>✔ Órdenes de trabajo y control de servicios</li>
+                <li>✔ Inventario y kárdex</li>
+                <li>✔ Clientes, vehículos y proveedores</li>
+                <li>✔ Reportes y finanzas</li>
+                <li>✔ Nómina y asistencias</li>
+            </ul>
+
+            <p class="text-xs text-slate-400 mt-auto">
+                Incluye soporte técnico y actualizaciones del sistema.
+            </p>
+        </div>
+
+        <!-- Pago único -->
+        <div class="vulyx-card p-10 rounded-3xl flex flex-col border border-blue-500/40">
+            <h3 class="text-blue-400 text-xs font-bold uppercase mb-4">Pago Único</h3>
+
+            <div class="text-5xl font-extrabold text-white">$799
+                <span class="text-sm text-slate-400">+ IVA</span>
+            </div>
+
+            <div class="mt-6 mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
+                <p class="text-sm text-slate-300">
+                    Implementación incluida (valorada en $250)
+                </p>
+            </div>
+
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                <li>✔ Acceso completo al sistema</li>
+                <li>✔ Sin pagos mensuales</li>
+                <!-- <li>✔ 1 año de mantenimiento incluido</li> -->
+                <li>✔ Soporte técnico básico</li>
+            </ul>
+
+            <p class="text-xs text-slate-400 mt-auto">
+                Renovación anual: $120 + IVA
+            </p>
+        </div>
+
+    </div>
+
+    <!-- IMPLEMENTACIÓN -->
+    <section class="vulyx-card p-8 rounded-3xl mb-12">
+        <h3 class="text-white font-bold mb-4">¿Qué incluye la implementación?</h3>
+        <ul class="text-sm text-slate-300 space-y-2">
+            <li>✔ Configuración inicial del sistema</li>
+            <li>✔ Creación de usuarios</li>
+            <li>✔ Carga básica de información</li>
+            <li>✔ Capacitación inicial</li>
+        </ul>
+    </section>
+
+    <!-- COMPARATIVA -->
+    <section class="vulyx-card p-8 rounded-3xl text-center">
+        <h3 class="text-white font-bold mb-6">Comparación a 2 años</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+                <p class="text-slate-400">Plan Mensual</p>
+                <p class="text-white font-bold">$1,090</p>
+            </div>
+            <div>
+                <p class="text-slate-400">Pago Único</p>
+                <p class="text-blue-400 font-bold">$919</p>
+            </div>
+        </div>
+
+        <p class="text-xs text-slate-500 mt-4">
+            *Valores sin IVA para comparación
+        </p>
+    </section>
+
+</main>
+
+<footer class="text-center text-xs text-slate-500 pb-10">
+    Precios no incluyen IVA (15%)
+    <div id="site-footer"></div>
+
+    <script src="assets/js/include.js" defer></script>
+</body>
+</html>
