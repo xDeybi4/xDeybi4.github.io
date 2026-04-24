@@ -1,0 +1,130 @@
+/* VULYX - Variables y estilos globales */
+:root {
+  --color-primary: #6A5CFF; /* Morado tecnológico */
+  --color-accent: #00D4FF;  /* Azul cian */
+  --color-bg: #0D1117;      /* Fondo principal (oscuro) */
+  --color-bg-alt: #0A0A0A;  /* Fondo alterno */
+  --color-text: #F5F7FA;    /* Texto principal */
+  --color-muted: #636B75;   /* Texto secundario / UI */
+  --font-family-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --brand-gradient: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+/* Base */
+html, body {
+  height: 100%;
+}
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mapear utilidades comunes (tailwind wrappers) hacia la paleta de marca */
+.text-violet-300, .text-violet-400, .text-violet-500 { color: var(--color-primary) !important; }
+.bg-violet-500, .bg-violet-600 { background-color: var(--color-primary) !important; }
+.hover\:bg-violet-600:hover { background-color: var(--color-primary) !important; }
+.text-gradient-purple { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Cursor personalizado */
+.cursor-dot { background-color: var(--color-primary) !important; }
+.cursor-outline { border-color: var(--color-primary) !important; }
+
+/* Pricing highlight */
+.pricing-card-highlight { border: 2px solid var(--color-primary) !important; box-shadow: 0 0 30px rgba(106,92,255,0.22) !important; }
+
+/* Accentos */
+.text-accent { color: var(--color-accent) !important; }
+.bg-accent { background-color: var(--color-accent) !important; }
+
+/* Muted text */
+.text-muted { color: var(--color-muted) !important; }
+
+/* Tema claro (override) */
+.theme-light {
+  --color-bg: #F5F7FA;
+  --color-text: #0D1117;
+  --color-muted: #636B75;
+}
+
+/* Pequeños ajustes de accesibilidad */
+a:focus { outline: 3px solid rgba(106,92,255,0.18); outline-offset: 2px; }
+
+/* Mantener utilidades responsive con Tailwind; usar este fichero para variables y overrides */
+
+/* --- Cursor & small UI --- */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s linear;
+}
+.cursor-outline {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.2s ease-out;
+}
+.cursor-outline.hovered { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+
+/* --- Text effects & gradients --- */
+.text-glow { text-shadow: 0 0 8px rgba(106,92,255,0.6), 0 0 20px rgba(139,92,246,0.4); }
+.text-gradient-purple { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.bg-gradient-radial-hero { background-image: radial-gradient(circle at 50% 50%, rgba(13,13,18,0.2) 0%, var(--color-bg) 70%); }
+
+/* --- Hero grid (animated background) --- */
+#hero-section { position: relative; overflow: hidden; perspective: 1000px; }
+#hero-grid {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+  background-image: linear-gradient(to right, rgba(106,92,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(106,92,255,0.08) 1px, transparent 1px);
+  background-size: 40px 40px; animation: vulyx-moveGrid 20s linear infinite;
+}
+@keyframes vulyx-moveGrid { from { background-position: 0 0; } to { background-position: 40px 80px; } }
+
+/* --- Cards --- */
+.portfolio-card { background-color: #111111; border: 1px solid #2d2d2d; overflow: hidden; transition: transform .4s cubic-bezier(.165,.84,.44,1), box-shadow .4s cubic-bezier(.165,.84,.44,1); }
+.portfolio-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(106,92,255,0.22); }
+.portfolio-card img { transition: transform .6s cubic-bezier(.165,.84,.44,1); }
+.portfolio-card:hover img { transform: scale(1.1); }
+.glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.06); }
+
+/* --- Pricing highlight override (stronger) --- */
+.pricing-card-highlight { border: 2px solid var(--color-primary) !important; box-shadow: 0 0 30px rgba(106,92,255,0.22) !important; }
+
+/* --- FAQ accordion --- */
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height .5s ease-in-out; }
+.faq-question.active + .faq-answer { max-height: 200px; }
+.faq-question .faq-icon { transition: transform .3s ease; }
+.faq-question.active .faq-icon { transform: rotate(180deg); }
+
+/* --- Back to top button --- */
+#back-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--color-primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; opacity: 0; transition: opacity .3s, visibility .3s; }
+#back-to-top.show { opacity: 1; display: flex; }
+
+/* Ensure anchored sections are visible below sticky header */
+section { scroll-margin-top: 5.5rem; }
+
+/* --- VULYX helpers --- */
+.vulyx-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.06); }
+
+/* Taller / VULYX specifics */
+.vulyx-gradient-text { background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.iva-badge { font-size: 0.65rem; padding: 2px 6px; background: rgba(255,255,255,0.06); border-radius: 4px; margin-left: 4px; }
+.taller-highlight { color: var(--color-accent); font-weight: 500; }
+

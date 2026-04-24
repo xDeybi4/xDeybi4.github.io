@@ -1,0 +1,43 @@
+<header class="bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="index.html" class="font-extrabold text-2xl text-white tracking-tighter inline-flex items-center gap-3">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M2 7L12 12L22 7" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 12V22" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <defs>
+          <linearGradient id="logo-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stop-color="var(--color-primary)" />
+            <stop offset="1" stop-color="var(--color-accent)" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>VULYX</span>
+    </a>
+    <div class="hidden md:flex items-center space-x-8 text-sm">
+      <a href="index.html#servicios" class="text-slate-300 hover:text-violet-300 font-medium transition-colors">Servicios</a>
+      <a href="index.html#productos" class="text-slate-300 hover:text-violet-300 font-medium transition-colors">Productos</a>
+      <a href="index.html#planes" class="text-slate-300 hover:text-violet-300 font-medium transition-colors">Planes</a>
+      <a href="index.html#faq" class="text-slate-300 hover:text-violet-300 font-medium transition-colors">FAQ</a>
+      <a href="index.html#contact" class="bg-violet-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-violet-600 transition-all duration-300 shadow-lg shadow-violet-500/20">Contáctanos</a>
+    </div>
+    
+    </div>
+    <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-violet-300 z-50">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile Menu (injected with header partial) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/90 backdrop-blur-lg z-40 transform -translate-x-full md:hidden flex items-center justify-center">
+  <div class="flex flex-col items-center space-y-8">
+    <a href="index.html#servicios" class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link">Servicios</a>
+    <a href="index.html#productos" class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link">Productos</a>
+    
+
+    <a href="index.html#planes" class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link">Planes</a>
+    <a href="index.html#faq" class="text-slate-200 text-3xl font-bold hover:text-violet-400 transition-colors mobile-link">FAQ</a>
+    <a href="index.html#contact" class="mt-4 bg-violet-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-violet-600 transition-colors mobile-link">Contáctanos</a>
+  </div>
+</div>
