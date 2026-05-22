@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vulyx | Tutorial Demo</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #162131;
+      --muted: #5b6b81;
+      --accent: #0b6bcb;
+      --accent-soft: #dbeeff;
+      --border: #d8e1ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Poppins", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, #e8f3ff 0%, transparent 35%),
+        radial-gradient(circle at 90% 0%, #dff6ff 0%, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(13, 36, 64, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .brand h1 {
+      font-size: 1.35rem;
+      margin: 0;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .step-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .step.reverse .step-text {
+      order: 2;
+    }
+
+    .step.reverse .capture-block {
+      order: 1;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .step h2 {
+      margin: 0 0 6px 0;
+      font-size: 1.08rem;
+    }
+
+    .step-text p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .capture-block {
+      border: 2px dashed #9eb8d8;
+      border-radius: 10px;
+      background: #f8fbff;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .capture-block img {
+      display: block;
+      width: 100%;
+      max-width: 680px;
+      max-height: 380px;
+      min-height: 220px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .capture-note {
+      margin: 8px 0 0 0;
+      color: #3e5c80;
+      font-size: 0.9rem;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #eef6ff;
+      border: 1px solid #d2e7ff;
+      color: #2e5078;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      .header,
+      .step {
+        padding: 14px;
+      }
+
+      .step-content {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .step.reverse .step-text,
+      .step.reverse .capture-block {
+        order: 0;
+      }
+
+      .capture-block img {
+        max-height: 260px;
+        min-height: 150px;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .container {
+        max-width: none;
+      }
+
+      .header {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="../assets/images/app_logo.png" alt="Logo Vulyx" />
+        <h1>Vulyx | Tutorial de ingreso a Demo</h1>
+      </div>
+      <p class="subtitle">
+        Guía rápida para mostrar cómo entrar al entorno Demo.
+      </p>
+      <p class="subtitle">
+              Enlace de acceso: https://app-gestion-taller-dev.web.app/
+      </p>
+    </header>
+
+    <section class="steps">
+      <article class="step">
+        <div class="step-content">
+          <div class="step-text">
+            <span class="step-number">1</span>
+            <h2>Abrir la aplicación</h2>
+            <p>
+              Inicia la app de Vulyx y espera a que cargue la pantalla de acceso principal.
+            </p>
+            
+          </div>
+          <div class="capture-block">
+            <img src="D:\Proyectos\GESTION_TALLER\taller_gestion\assets\images\app_logo.png" alt="Captura 1 - Pantalla inicial" />
+            <p class="capture-note">Captura 1: Pantalla inicial</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step reverse">
+        <div class="step-content">
+          <div class="step-text">
+            <span class="step-number">2</span>
+            <h2>Ir a la opción Demo</h2>
+            <p>
+              En la pantalla de acceso, selecciona la opción que te permite entrar al entorno Demo.
+            </p>
+          </div>
+          <div class="capture-block">
+            <img src="D:/Users/deybi/Downloads/Demo Taller/Login_Demo.png" alt="Captura 2 - Botón u opción Demo" />
+            <p class="capture-note">Captura 2: Botón u opción Demo</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step-content">
+          <div class="step-text">
+            <span class="step-number">3</span>
+            <h2>Elegir rol de ingreso</h2>
+            <p>
+              En la Demo compartida no se ingresan credenciales: selecciona el rol con el que deseas entrar.
+            </p>
+          </div>
+          <div class="capture-block">
+            <img src="D:\Users\deybi\Downloads\Demo Taller\Roles_Demo.png" alt="Captura 3 - Selección de rol" />
+            <p class="capture-note">Captura 3: Selección de rol</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step reverse">
+        <div class="step-content">
+          <div class="step-text">
+            <span class="step-number">4</span>
+            <h2>Verificar ingreso correcto</h2>
+            <p>
+              Confirma que se cargó el panel o la pantalla principal de la Demo para comenzar la exploración.
+            </p>
+          </div>
+          <div class="capture-block">
+            <img src="D:\Users\deybi\Downloads\Demo Taller\Drawer_Demo.png" alt="Captura 4 - Pantalla principal Demo" />
+            <p class="capture-note">Captura 4: Pantalla principal Demo</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    
+  </div>
+</body>
+</html>
